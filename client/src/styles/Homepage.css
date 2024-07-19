@@ -1,0 +1,146 @@
+/* .banner-img {
+    margin-top: 10px;
+  } */
+  
+  .home-page h1 {
+    color: hsl(0, 55%, 8%);
+    font-family: "Playfair Display", serif;
+  }
+  
+  .home-page {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .home-page .card {
+    background-color: rgba(128, 128, 128, 0.097);
+    width: 18rem;
+  }
+  .home-page .card-name-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .home-page .card-price {
+    color: green;
+    font-weight: bold;
+  }
+  .home-page button {
+    border-radius: 0;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .home-page .card-text {
+    color: rgb(90, 89, 89);
+  }
+  
+  .home-page .card img:hover {
+    transform: scale(1.02);
+    border: 2px solid rgba(0, 128, 128);
+  }
+  
+  .home-page .card-img-top {
+    height: 300px !important;
+  }
+
+
+  #add_to_cart_btn:hover{
+    background-color: hsl(60, 100%, 50%);
+    color: black;
+    transition: 0.3s;
+ }
+ 
+  
+  #more_details_btn:hover{
+    background-color: hsl(201, 79%, 61%);
+    color: black;
+  }
+
+  /* ==================
+  filters
+  ============== */
+  .filters h4 {
+    margin-top: 100px;
+    color: gray !important;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.337);
+  }
+  
+   /* .ant-checkbox-wrapper:first-of-type {
+    margin-left: 2px;
+  }  */
+  
+  .ant-checkbox-wrapper{
+    position: relative;
+    left: 1vw;
+  }
+  .ant-radio-wrapper {
+    margin-bottom: 5px !important;
+    position: relative;
+    left: 1vw;
+  }
+  
+  .filters button {
+    background-color: black;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    margin-top: 20px;
+  }
+  
+  /* .loadmore {
+    color: hsla(18, 100%, 50%, 0.822);
+    font-weight: bold;
+
+    width: 30% !important;
+    border-radius: 20;
+    font-size: 20px !important;
+  } */
+  /* General Button Styling */
+.load-more-btn {
+  display: inline-block;
+  position: relative;
+  left : 30%;
+  padding: 12px 24px;
+  font-size: 20px !important;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  background-color: #4CAF50; /* Primary background color */
+  color: white; /* Text color */
+  border: none;
+  width: 20% !important;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hover Effect */
+.load-more-btn:hover {
+  background-color: #45a049; /* Darker background color on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Active/Clicked Effect */
+.load-more-btn:active {
+  background-color: #3e8e41; /* Even darker background color when clicked */
+  transform: translateY(0); /* Reset lift effect */
+}
+
+/* Focus Effect */
+.load-more-btn:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 4px rgba(72, 191, 85, 0.5); /* Custom focus outline */
+}
+
+/* Disabled State */
+.load-more-btn:disabled {
+  background-color: #cccccc; /* Gray background color for disabled state */
+  color: #666666; /* Gray text color for disabled state */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+  pointer-events: none; /* Disable click events */
+}

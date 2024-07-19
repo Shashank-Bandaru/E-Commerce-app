@@ -1,0 +1,15 @@
+.card {
+    background-color: rgba(128, 128, 128, 0.097);
+    width: 18rem;
+  }
+  .card-name-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+.card-price {
+    color: green;
+    font-weight: bold;
+  }
