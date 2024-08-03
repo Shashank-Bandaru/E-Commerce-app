@@ -1,3 +1,4 @@
+import productModel from "../models/productModel.js";
 import categoryModel from "../models/categoryModel.js";
 import slugify from "slugify";
 
@@ -62,7 +63,7 @@ export const updateCategoryController = async (req, res) => {
 
 // fetch all the categories
 
-export const getAllCategoryController = async(req,res)=>{
+export const getAllCategoryController = async (req, res) => {
   try {
     const category = await categoryModel.find({});
     res.status(200).send({
@@ -78,14 +79,11 @@ export const getAllCategoryController = async(req,res)=>{
       message: "Error while fetching the category list",
     });
   }
-
 };
 
-
-export const getSingleCategoryController = async(req,res)=>{
-
+export const getSingleCategoryController = async (req, res) => {
   try {
-    const category = await categoryModel.findOne({slug:req.params.slug});
+    const category = await categoryModel.findOne({ slug: req.params.slug });
     res.status(200).send({
       success: true,
       message: "Requested single category data has been successfully fetched",
@@ -99,17 +97,18 @@ export const getSingleCategoryController = async(req,res)=>{
       message: "Error while fetching the requested category",
     });
   }
+};
 
-}
-
-
-export const deleteCategoryController = async(req,res)=>{
+export const deleteCategoryController = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
+    await productModel.deleteMany({
+      category: id,
+    });
     await categoryModel.findByIdAndDelete(id);
     res.status(200).send({
       success: true,
-      message: "Category Deleted Successfully",
+      message: "Category and associated products are Deleted Successfully",
     });
   } catch (error) {
     console.log(error);
@@ -119,5 +118,4 @@ export const deleteCategoryController = async(req,res)=>{
       message: "Error while deleting the requested category",
     });
   }
-
-}
+};

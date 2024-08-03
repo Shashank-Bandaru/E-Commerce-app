@@ -30,7 +30,7 @@ const CartPage = () => {
       console.log(error);
     }
   };
-  //detele item
+  //delete item
   const removeCartItem = (pid) => {
     try {
       let myCart = [...cart];

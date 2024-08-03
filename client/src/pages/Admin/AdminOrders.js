@@ -17,6 +17,7 @@ const AdminOrders = () => {
     "cancelled",
   ]);
   const [changeStatus, setCHangeStatus] = useState("");
+  const [remove, setremove] = useState(false);
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const getOrders = async () => {
@@ -37,11 +38,31 @@ const AdminOrders = () => {
       const { data } = await axios.put(`${process.env.REACT_APP_LINK}/api/v1/auth/order-status/${orderId}`, {
         status: value,
       });
+      if(value==="cancelled") setremove(true);
+      else{
+        setremove(false);
+      }
       getOrders();
     } catch (error) {
       console.log(error);
     }
   };
+  const handleDelete = async(orderId)=>{
+    try {
+      const { data } = await axios.delete(
+        `${process.env.REACT_APP_LINK}/api/v1/auth/order-delete/${orderId}`
+      );
+      if (data.success) {
+        toast.success(`Order has been deleted successfully`);
+
+        getOrders();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  }
   return (
     <Layout title={"All Orders Data"}>
       <div className="row dashboard">
@@ -49,7 +70,9 @@ const AdminOrders = () => {
           <AdminMenu />
         </div>
         <div className="col-md-9">
-          <h1 className="text-center">All Orders</h1>
+          <h1>All Orders</h1>
+          {(orders.length===0)?<p style={{fontSize:"20px"}}>Order list is empty. If new orders are placed then their details will be displayed here.</p>:
+          <div  style={{maxHeight:"60vh",overflow: "auto"}}> 
           {orders?.map((o, i) => {
             return (
               <div className="border shadow">
@@ -62,6 +85,7 @@ const AdminOrders = () => {
                       <th scope="col"> date</th>
                       <th scope="col">Payment</th>
                       <th scope="col">Quantity</th>
+                      {(remove)?<th scope="col">Action</th>:<></>}
                     </tr>
                   </thead>
                   <tbody>
@@ -81,9 +105,17 @@ const AdminOrders = () => {
                         </Select>
                       </td>
                       <td>{o?.buyer?.name}</td>
-                      <td>{moment(o?.createAt).fromNow()}</td>
+                      <td>{moment(o?.createdAt).fromNow()}</td>
                       <td>{o?.payment.success ? "Success" : "Failed"}</td>
                       <td>{o?.products?.length}</td>
+                      {(remove)?<td><button
+                            className="btn btn-danger"
+                            onClick={() => {
+                              handleDelete(o?._id);
+                            }}
+                          >
+                            Delete
+                          </button></td>:<></>}
                     </tr>
                   </tbody>
                 </table>
@@ -95,7 +127,7 @@ const AdminOrders = () => {
                           src={`${process.env.REACT_APP_LINK}/api/v1/product/product-image/${p._id}`}
                           className="card-img-top"
                           alt={p.name}
-                          width="80px"
+                          width="40px"
                           height={"auto"}
                         />
                       </div>
@@ -106,7 +138,7 @@ const AdminOrders = () => {
                           </p>
                           <p>
                             <b>Description : </b>
-                            {p.description.substring(0, 530)}....
+                            {p.description.substring(0, 230)}....
                           </p>
                           <p>
                             <b>Price : </b>₹{p.price}
@@ -114,10 +146,13 @@ const AdminOrders = () => {
                       </div>
                     </div>
                   ))}
+                  
+                  
                 </div>
               </div>
             );
           })}
+          </div>}
         </div>
       </div>
     </Layout>

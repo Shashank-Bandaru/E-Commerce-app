@@ -283,3 +283,22 @@ export const orderStatusController = async (req, res) => {
       });
     }
   };
+
+  //delete orders
+  export const deleteOrderController = async(req,res)=>{
+    try {
+        const { orderId } = req.params;
+        await order_model.findByIdAndDelete(orderId);
+        res.status(200).send({
+          success: true,
+          message: "Order Deleted Successfully",
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(500).send({
+          success: false,
+          error,
+          message: "Error while deleting the requested order",
+        });
+      }
+  }

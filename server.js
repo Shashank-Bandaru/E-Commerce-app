@@ -7,6 +7,7 @@ import authRoutes from "./routes/authenticationRoute.js";
 import cors from "cors";
 import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoute.js"
 
 //configure the env
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(morgan("dev"));
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
+app.use("/api/v1/user",userRoutes);
 
 //REST API
 app.get("/", (req, res) => {

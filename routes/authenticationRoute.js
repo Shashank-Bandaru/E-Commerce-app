@@ -8,6 +8,7 @@ import {
   getOrdersController,
   orderStatusController,
   getAllOrdersController,
+  deleteOrderController,
 } from "../controllers/authenticationController.js";
 import {
   isAdmin,
@@ -56,6 +57,13 @@ router.put(
   requiresSignIn,
   isAdmin,
   orderStatusController
+);
+//order delete
+router.delete(
+  "/order-delete/:orderId",
+  requiresSignIn,
+  isAdmin,
+  deleteOrderController
 );
 
 export default router;
